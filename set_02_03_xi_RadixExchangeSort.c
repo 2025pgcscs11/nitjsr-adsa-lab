@@ -2,7 +2,9 @@
 #include <stdbool.h>
 
 void PrintArray(int *, int);
-void RadixSort(int *, int);
+int partition(int *, int, int, int);
+int getMaxBit(int *, int);
+void RadixExchangeSort(int *, int, int, int);
 bool IsSortedArray(int *, int);
 
 // Function to Print the entire array
@@ -34,32 +36,61 @@ bool IsSortedArray(int *arr, int size)
     return ascending || descending;
 }
 
-// Function to sort array using Radix Sort Algorithm
-void RadixSort(int *arr, int size)
+// Function to partition array by the given bit position
+int partition(int *arr, int low, int high, int bit)
 {
-    int max = 0;
-    for (int i = 0; i < size; i++)
+    int i = low, j = high;
+    while (i <= j)
+    {
+        while (i <= j && ((arr[i] >> bit) & 1) == 0)
+        {
+            i++;
+        }
+        while (i <= j && ((arr[j] >> bit) & 1) == 1)
+        {
+            j--;
+        }
+        if (i < j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
+// Recursive Radix Exchange Sort
+void RadixExchangeSort(int *arr, int low, int high, int bit)
+{
+    if (low >= high || bit < 0)
+        return;
+
+    int mid = partition(arr, low, high, bit);
+
+    RadixExchangeSort(arr, low, mid - 1, bit - 1);
+    RadixExchangeSort(arr, mid, high, bit - 1);
+}
+
+//  function to find the most significant bit position
+int getMaxBit(int arr[], int n)
+{
+    int max = arr[0];
+    for (int i = 1; i < n; i++)
     {
         if (arr[i] > max)
             max = arr[i];
     }
-    for (int exp = 1; max / exp > 0; exp *= 10)
+
+    int bit = 0;
+    while (max > 0)
     {
-        int count[10] = {0};
-        int b[size];
-        for (int i = 0; i < size; i++)
-            count[(arr[i] / exp) % 10]++;
-        for (int i = 1; i < 10; i++)
-            count[i] += count[i - 1];
-        for (int i = size - 1; i >= 0; i--)
-        {
-            int digit = (arr[i] / exp) % 10;
-            b[count[digit] - 1] = arr[i];
-            count[digit]--;
-        }
-        for (int i = 0; i < size; i++)
-            arr[i] = b[i];
+        max >>= 1;
+        bit++;
     }
+    return bit - 1;
 }
 
 int main()
@@ -82,20 +113,19 @@ int main()
         {
             if (arr[i] < 0)
             {
-                printf("Radix Sort can not be applied here.\n");
+                printf("Radix Exchange Sort can not be applied here.\n");
                 return 0;
             }
         }
-        RadixSort(arr, size);
-        printf("-----After Sorting-----\n");
+        int maxBit = getMaxBit(arr, size);
+        RadixExchangeSort(arr, 0, size - 1, maxBit);
         if (IsSortedArray(arr, size))
         {
+            printf("<===============After Sorting===============>\n");
             PrintArray(arr, size);
         }
         else
-        {
-            printf("The Sorting Algorithm is failed.\n");
-        }
+            printf("The Sorting algorithm is failed!\n");
     }
     else
         printf("The array is Sorted.\n");

@@ -2,8 +2,8 @@
 #include <stdbool.h>
 
 void PrintArray(int *, int);
-void RadixSort(int *, int);
 bool IsSortedArray(int *, int);
+void AddressCalculationSort(int*,int);
 
 // Function to Print the entire array
 void PrintArray(int *arr, int size)
@@ -31,34 +31,35 @@ bool IsSortedArray(int *arr, int size)
         if (arr[i] > arr[i - 1])
             descending = false;
     }
-    return ascending || descending;
 }
 
-// Function to sort array using Radix Sort Algorithm
-void RadixSort(int *arr, int size)
+// Address Calculation Sort
+void AddressCalculationSort(int *arr, int size)
 {
-    int max = 0;
-    for (int i = 0; i < size; i++)
+    int min = arr[0], max = arr[0];
+    for (int i = 1; i < size; i++)
     {
+        if (arr[i] < min)
+            min = arr[i];
         if (arr[i] > max)
             max = arr[i];
     }
-    for (int exp = 1; max / exp > 0; exp *= 10)
+
+    int range = max - min + 1;
+    int bucket[range];
+    for (int i = 0; i < range; i++) bucket[i] = 0;
+    for (int i = 0; i < size; i++)
     {
-        int count[10] = {0};
-        int b[size];
-        for (int i = 0; i < size; i++)
-            count[(arr[i] / exp) % 10]++;
-        for (int i = 1; i < 10; i++)
-            count[i] += count[i - 1];
-        for (int i = size - 1; i >= 0; i--)
+        bucket[arr[i] - min]++;
+    }
+    int index = 0;
+    for (int i = 0; i < range; i++)
+    {
+        while (bucket[i] > 0)
         {
-            int digit = (arr[i] / exp) % 10;
-            b[count[digit] - 1] = arr[i];
-            count[digit]--;
+            arr[index++] = i + min;
+            bucket[i]--;
         }
-        for (int i = 0; i < size; i++)
-            arr[i] = b[i];
     }
 }
 
@@ -82,20 +83,18 @@ int main()
         {
             if (arr[i] < 0)
             {
-                printf("Radix Sort can not be applied here.\n");
+                printf("Address Calculation Sort can not be applied here.\n");
                 return 0;
             }
         }
-        RadixSort(arr, size);
-        printf("-----After Sorting-----\n");
+        AddressCalculationSort(arr, size);
         if (IsSortedArray(arr, size))
         {
+            printf("<===============After Sorting===============>\n");
             PrintArray(arr, size);
         }
         else
-        {
-            printf("The Sorting Algorithm is failed.\n");
-        }
+            printf("The Sorting algorithm is failed!\n");
     }
     else
         printf("The array is Sorted.\n");

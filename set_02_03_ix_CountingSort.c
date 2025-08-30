@@ -37,35 +37,27 @@ bool IsSortedArray(int *arr, int size)
 // Function to sort array using Counting Sort Algorithm
 void CountingSort(int *arr, int size)
 {
-	int k = 0;
-	for (int i = 0; i < size; i++)
-	{
-		if (arr[i] >= 0)
-		{
-			if (arr[i] > k)
-				k = arr[i];
-		}
-		else
-		{
-			printf("Counting sort can not be applied here.\n");
-			return;
-		}
-	}
-	k++;
-	int c[k], b[size];
-	for (int i = 0; i < k; i++)
-		c[i] = 0;
-	for (int i = 0; i < size; i++)
-		c[arr[i]]++;
-	for (int i = 1; i < k; i++)
-		c[i] = c[i] + c[i - 1];
-	for (int i = size - 1; i >= 0; i--)
-	{
-		b[c[arr[i]] - 1] = arr[i];
-		c[arr[i]]--;
-	}
-	for (int i = 0; i < size; i++)
-		arr[i] = b[i];
+    int k = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] > k)
+            k = arr[i];
+    }
+    k++;
+    int c[k], b[size];
+    for (int i = 0; i < k; i++)
+        c[i] = 0;
+    for (int i = 0; i < size; i++)
+        c[arr[i]]++;
+    for (int i = 1; i < k; i++)
+        c[i] = c[i] + c[i - 1];
+    for (int i = size - 1; i >= 0; i--)
+    {
+        b[c[arr[i]] - 1] = arr[i];
+        c[arr[i]]--;
+    }
+    for (int i = 0; i < size; i++)
+        arr[i] = b[i];
 }
 
 int main()
@@ -84,20 +76,23 @@ int main()
     isSort = IsSortedArray(arr, size);
     if (!isSort)
     {
+
         for (int i = 0; i < size; i++)
-		{
-			if (arr[i] >= 0)
-			{
-				printf("Counting Sort can not be applied here.\n");
-				return 0;
-			}
-		}
+        {
+            if (arr[i] < 0)
+            {
+                printf("Counting Sort can not be applied here.\n");
+                return 0;
+            }
+        }
         CountingSort(arr, size);
         printf("-----After Sorting-----\n");
-        if(IsSortedArray(arr,size)){
+        if (IsSortedArray(arr, size))
+        {
             PrintArray(arr, size);
         }
-        else{
+        else
+        {
             printf("The Sorting Algorithm is failed.\n");
         }
     }
