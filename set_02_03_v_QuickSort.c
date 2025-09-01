@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 void PrintArray(int *, int);
-int Parition(int*,int,int);
+int Partition(int*,int,int);
 void Swap(int*,int*);
 void QuickSort(int *, int,int);
 bool IsSortedArray(int *, int);

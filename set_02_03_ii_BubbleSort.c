@@ -35,7 +35,6 @@ bool IsSortedArray(int *arr, int size)
 }
 
 // Function to sort array using Bubble Sort Algorithm
-// Function to sort array using Bubble Sort Algorithm
 void BubbleSort(int *arr, int size)
 {
 	bool swapped = true;
