@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// Structure of Stack
 typedef struct
 {
     int top;
@@ -34,7 +35,7 @@ bool IsStackFull(Stack *s)
     if (s->top == s->size - 1)
         return true;
     else
-        false;
+        return false;
 }
 
 // Fetching the top value of stack
