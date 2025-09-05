@@ -81,7 +81,7 @@ void DeQueue(struct CircularQueue *q)
     }
 }
 
-// Function to destroy the entire queue's memeory
+// Function to destroy the entire queue's memory
 void DestroyQueue(struct CircularQueue **q)
 {
     if (*q)
