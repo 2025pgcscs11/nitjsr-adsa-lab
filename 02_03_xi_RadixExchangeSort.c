@@ -2,8 +2,8 @@
 #include <stdbool.h>
 
 void PrintArray(int *, int);
-int partition(int *, int, int, int);
-int getMaxBit(int *, int);
+int Partition(int *, int, int, int);
+int GetMaxBit(int *, int);
 void RadixExchangeSort(int *, int, int, int);
 bool IsSortedArray(int *, int);
 
@@ -37,7 +37,7 @@ bool IsSortedArray(int *arr, int size)
 }
 
 // Function to partition array by the given bit position
-int partition(int *arr, int low, int high, int bit)
+int Partition(int *arr, int low, int high, int bit)
 {
     int i = low, j = high;
     while (i <= j)
@@ -68,17 +68,17 @@ void RadixExchangeSort(int *arr, int low, int high, int bit)
     if (low >= high || bit < 0)
         return;
 
-    int mid = partition(arr, low, high, bit);
+    int mid = Partition(arr, low, high, bit);
 
     RadixExchangeSort(arr, low, mid - 1, bit - 1);
     RadixExchangeSort(arr, mid, high, bit - 1);
 }
 
-//  function to find the most significant bit position
-int getMaxBit(int arr[], int n)
+//  Function to find the most significant bit position
+int GetMaxBit(int *arr, int size)
 {
     int max = arr[0];
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < size; i++)
     {
         if (arr[i] > max)
             max = arr[i];
@@ -117,7 +117,7 @@ int main()
                 return 0;
             }
         }
-        int maxBit = getMaxBit(arr, size);
+        int maxBit = GetMaxBit(arr, size);
         RadixExchangeSort(arr, 0, size - 1, maxBit);
         if (IsSortedArray(arr, size))
         {

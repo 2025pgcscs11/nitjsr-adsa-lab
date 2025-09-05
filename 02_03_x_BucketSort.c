@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// Structure of the list node
 typedef struct LL
 {
     float data;
@@ -9,6 +10,7 @@ typedef struct LL
     struct LL *prev;
 } node;
 
+// Insert element d into the list
 node *LinkedListInsert(node *list, float d)
 {
     node *new_node = (node *)malloc(sizeof(node));
@@ -32,6 +34,7 @@ node *LinkedListInsert(node *list, float d)
     return list;
 }
 
+// Show linked list's elements
 void ShowLinkedList(node *list)
 {
     node *temp = list;
@@ -43,6 +46,7 @@ void ShowLinkedList(node *list)
     printf("NULL\n");
 }
 
+// Remove a node from the starting
 node *DeleteStart(node *list, float *d)
 {
     node *temp = list;
@@ -65,6 +69,7 @@ void Swap(float *a, float *b)
     *b = temp;
 }
 
+// Insertion sort for Linked List elements
 node *LinkedListInsertionSort(node *list)
 {
     if (list != NULL)
@@ -87,6 +92,7 @@ node *LinkedListInsertionSort(node *list)
     return NULL;
 }
 
+// Bucket Sort Algorithm
 void BucketSort(float *arr, int size)
 {
     for (int i = 0; i < size; i++)
@@ -158,7 +164,7 @@ int main()
     printf("Enter the size of the array: ", size);
     scanf("%d", &size);
     float arr[size];
-    printf("Enter the element of the array[0,1)] : ");
+    printf("Enter the element of the array[0,1) : ");
     for (int i = 0; i < size; i++)
     {
         scanf("%f", &arr[i]);
@@ -178,7 +184,7 @@ int main()
         BucketSort(arr, size);
         if (IsSortedArray(arr, size))
         {
-            printf("<===============After Sorting===============>");
+            printf("<===============After Sorting===============>\n");
             PrintArray(arr, size);
         }
         else
