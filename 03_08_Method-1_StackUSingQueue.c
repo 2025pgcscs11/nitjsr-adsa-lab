@@ -121,7 +121,7 @@ void PopStack(Stack *s)
 {
     if (IsEmptyQueue(s->q1))
     {
-        printf("Stack is empty\n");
+        printf("Stack is empty.\n");
         return;
     }
     DeQueue(s->q1);

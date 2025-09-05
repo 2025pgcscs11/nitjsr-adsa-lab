@@ -113,7 +113,7 @@ void PopStack(Stack *s)
 {
     if (IsEmptyQueue(s->q1))
     {
-        printf("Stack is empty\n");
+        printf("Stack is empty.\n");
         return;
     }
     while (s->q1->front->next)

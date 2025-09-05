@@ -87,7 +87,7 @@ Queue *CreateQueue(int size)
     return queue;
 }
 
-// Insert element into queue using  | O(1) | THis operation can not maintain the queue property
+// Insert element into queue | O(1) | This operation can not maintain the queue property
 void EnQueue(Queue *q, int data)
 {
     StackPush(q->s1, data);
