@@ -17,6 +17,17 @@ Node *CreateTree()
     return NULL;
 }
 
+// Delete node of the tree
+void DeleteTree(Node **root)
+{
+    if (*root == NULL)
+        return;
+    DeleteTree(&((*root)->left));
+    DeleteTree(&((*root)->right));
+    free(*root);
+    *root = NULL;
+}
+
 // Function that return height of a node
 int Height(Node *root)
 {
@@ -123,15 +134,32 @@ bool SearchItem(Node *root, int value)
         return SearchItem(root->left, value) || SearchItem(root->right, value);
 }
 
-// Delete node of the tree
-void DeleteItem(Node **root)
+// Delete Item from the Tree i.e maximum value node
+void DeleteItemMAX(Node **root)
 {
-    if (*root == NULL)
+    if ((*root)->right == NULL)
+    {
+        Node *dump = *root;
+        *root = (*root)->left;
+        free(dump);
         return;
-    DeleteItem(&((*root)->left));
-    DeleteItem(&((*root)->right));
-    free(*root);
-    *root = NULL;
+    }
+    else
+        DeleteItemMAX(&((*root)->right));
+}
+
+// Delete Item from the Tree i.e minimum value node
+void DeleteItemMIN(Node **root)
+{
+    if ((*root)->left == NULL)
+    {
+        Node *dump = *root;
+        *root = (*root)->right;
+        free(dump);
+        return;
+    }
+    else
+        DeleteItemMIN(&((*root)->left));
 }
 
 // Print Preorder Traversal of the tree
@@ -158,13 +186,31 @@ int main()
     // After When 9 is inserted the order changes to maintain the balance
     root = InsertItem(root, 9);
     PreOrderTraversal(root);
+
+    // Searching a element
     printf("\n");
     if (SearchItem(root, 4))
         printf("Search item is found.\n");
     else
         printf("Search item is not found.\n");
-    DeleteItem(&root);
+
+    // Deleting the maximum element
+    printf("\n");
+    printf("After Deleting MAX element from the tree: ");
+    DeleteItemMAX(&root);
+    PreOrderTraversal(root);
+
+    // Deleting the minimum element
+    printf("\n");
+    printf("After Deleting MIN element from the tree: ");
+    DeleteItemMIN(&root);
+    PreOrderTraversal(root);
+
+    // Deleting the Tree
+    printf("\n");
+    DeleteTree(&root);
     if (root == NULL)
         printf("The AVL Tree is deleted.\n");
+
     return 0;
 }
