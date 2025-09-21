@@ -79,7 +79,7 @@ Node *RLRotation(Node *root)
     return RRRotation(root);
 }
 
-// Insert a element into Binary Search Tree
+ // Insert a element into Binary Search Tree
 Node *InsertItem(Node *root, int value)
 {
     Node *ptr = (Node *)malloc(sizeof(Node));
@@ -167,7 +167,7 @@ void PreOrderTraversal(Node *root)
 {
     if (root == NULL)
         return;
-    printf("%d ", root->data);
+    printf("%d(%d) ", root->data,root->height);
     PreOrderTraversal(root->left);
     PreOrderTraversal(root->right);
 }
@@ -176,11 +176,11 @@ int main()
 {
     Node *root = NULL;
     root = CreateTree();
-    root = InsertItem(root, 3);
-    root = InsertItem(root, 5);
-    root = InsertItem(root, 1);
-    root = InsertItem(root, 2);
+    root = InsertItem(root, 4);
     root = InsertItem(root, 8);
+  //  root = InsertItem(root, 2);
+   // root = InsertItem(root, 1);
+   // root = InsertItem(root, -2);
     PreOrderTraversal(root);
     printf("\n");
     // After When 9 is inserted the order changes to maintain the balance

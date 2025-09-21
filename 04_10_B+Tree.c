@@ -26,7 +26,7 @@ BPlusNode* createNode(bool isLeaf) {
     return node;
 }
 
-// Creae Tree
+// Create Tree
 BPlusTree* createTree() {
     BPlusTree* tree = (BPlusTree*)malloc(sizeof(BPlusTree));
     tree->root = createNode(true);
