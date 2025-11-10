@@ -101,9 +101,9 @@ int main() {
     scanf("%d", &V);
     printf("Enter number of edges: ");
     scanf("%d", &E);
-
+    printf("Enter edge (u v): ");
     for (int i = 0; i < E; i++) {
-        printf("Enter edge (u v): ");
+       
         scanf("%d %d", &u, &v);
         adj[u][v] = 1;
     }
