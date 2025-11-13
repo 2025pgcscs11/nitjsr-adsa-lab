@@ -1,2 +1,5 @@
 *.exe
 *.out
+node_modules
+jees.db
+students.csv

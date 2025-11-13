@@ -1,0 +1,42 @@
+/* index.css - custom styling on top of Bootstrap */
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  color: #243b55;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.app-container {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 18px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(36,59,85,0.08);
+}
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+.form-card {
+  padding: 16px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  box-shadow: 0 3px 12px rgba(36,59,85,0.04);
+}
+.small-note {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+.table thead th {
+  background: #f1f5f9;
+  border-bottom: none;
+}
+.btn-smooth {
+  border-radius: 8px;
+  padding: 8px 14px;
+  box-shadow: 0 4px 12px rgba(59,130,246,0.08);
+}
+.footer {
+  text-align: center;
+  margin-top: 14px;
+  color: #6b7280;
+}
