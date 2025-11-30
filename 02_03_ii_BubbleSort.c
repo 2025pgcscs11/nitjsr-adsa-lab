@@ -38,10 +38,10 @@ bool IsSortedArray(int *arr, int size)
 void BubbleSort(int *arr, int size)
 {
 	bool swapped = true;
-	for (int i = size - 1; i >= 0 && swapped; i--)
+	for (int i = 0; i < size-1 && swapped; i++)
 	{
 		swapped = false;
-		for (int j = 0; j < size - 1; j++)
+		for (int j = 0; j < size -i - 1; j++)
 		{
 			if (arr[j] > arr[j + 1])
 			{
