@@ -110,6 +110,14 @@ void DeQueue(Queue *q)
         }
     }
     StackPop(q->s2);
+    if (IsStackEmpty(q->s1))
+    {
+        while (!IsStackEmpty(q->s2))
+        {
+            StackPush(q->s1, StackTop(q->s2));
+            StackPop(q->s2);
+        }
+    }
 }
 
 // Print the entire Queue
@@ -137,6 +145,7 @@ int main()
     EnQueue(queue, 5);
     PrintQueue(queue);
     DeQueue(queue);
+    EnQueue(queue, 8);
     DeQueue(queue);
     PrintQueue(queue);
     return 0;
